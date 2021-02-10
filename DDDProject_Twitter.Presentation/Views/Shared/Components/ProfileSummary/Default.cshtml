@@ -1,0 +1,31 @@
+﻿@inject SignInManager<DDDProject_Twitter.Domain.Entities.Concrete.AppUser> SignInManager
+@using Microsoft.AspNetCore.Identity
+@model DDDProject_Twitter.Application.Models.DTOs.ProfileSummaryDTO
+
+<h4>Profile Summary</h4>
+<div class="card">
+    <div class="card-header">
+        <img src="@Model.ImagePath" class="card-img-top" />
+    </div>
+    <div class="card-body">
+        <h3 class="card-title">@Model.Name</h3>
+        <h3 class="card-title">@Model.UserName</h3>
+
+        @if (SignInManager.IsSignedIn(User) && User.Identity.Name != Model.UserName)
+        {
+            @await Component.InvokeAsync("FollowUser", new { UserName = @Model.UserName })
+        }
+        else if (SignInManager.IsSignedIn(User) && User.Identity.Name == Model.UserName)
+        {
+            <a asp-controller="Account" asp-action="EditProfile" asp-route-username="@User.Identity.Name">Settings</a>
+        }
+
+        <ul>
+            <li>@Model.TweetCount Tweets</li>
+            <li>@Model.FollowerCount</li>
+            <li>@Model.FollowingCount</li>
+        </ul>
+    </div>
+</div>
+
+

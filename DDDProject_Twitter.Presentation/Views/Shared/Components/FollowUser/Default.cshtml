@@ -1,0 +1,24 @@
+﻿
+@model DDDProject_Twitter.Application.Models.DTOs.FollowDTO
+
+<input hidden asp-for="FollowerId" />
+<input hidden asp-for="FollowingId" />
+
+@{
+    if (Model.isExsist)
+    {
+        <button id="UnFollow" onclick="Follow(@Model.isExsist.ToString().ToLower())" class="btn btn-info btn-sm">
+            <i class="fa fa-minus">Unfollow</i>
+        </button>
+    }
+    else
+    {
+        <button id="Follow" onclick="Follow(@Model.isExsist.ToString().ToLower())" class="btn btn-info btn-sm">
+            <i class="fa fa-plus">Follow</i>
+        </button>
+    }
+}
+
+
+
+
