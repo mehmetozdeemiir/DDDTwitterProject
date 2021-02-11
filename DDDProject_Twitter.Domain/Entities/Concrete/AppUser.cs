@@ -19,7 +19,7 @@ namespace DDDProject_Twitter.Domain.Entities.Concrete
             Mentions = new List<Mention>();
         }
         public string Name { get; set; }
-        public string ImagePath { get; set; } = "/images/user/Default.jpg";
+        public string ImagePath { get; set; } = "/images/users/default.jpg";
 
         private DateTime _createDate = DateTime.Now;
         public DateTime CreateDate { get => _createDate; set => _createDate = value; }

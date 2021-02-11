@@ -13,6 +13,10 @@ namespace DDDProject_Twitter.Presentation.Models.ViewComponents
 
         public ProfileSummary(IAppUserService appUserService) => this._appUserService = appUserService;
 
-        public async Task<IViewComponentResult> InvokeAsync(string userName) => View(await _appUserService.GetByUserName(userName));
+        public async Task<IViewComponentResult> InvokeAsync(string userName)
+        { 
+            return View(await _appUserService.GetByUserName(userName));
+        }
+        
     }
 }

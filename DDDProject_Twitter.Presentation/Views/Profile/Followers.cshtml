@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "Followers";
+}
+
+<div class="card">
+    <div class="card-header">Followers</div>
+    <div class="card-body">
+        <ul class="list-group-item" id="UserResult">
+        </ul>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var userName = '@ViewBag.userName';
+        var controllerName = '@ViewContext.RouteData.Values["Controller"].ToString()';
+        var actionName = '@ViewContext.RouteData.Values["Action"].ToString()';
+    </script>
+    <script src="~/js/get-userlist.js"></script>
+}

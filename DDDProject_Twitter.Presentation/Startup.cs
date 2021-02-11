@@ -1,10 +1,11 @@
-
+using DDDProject_Twitter.Application.Mapper;
 using DDDProject_Twitter.Domain.Entities.Concrete;
 using DDDProject_Twitter.Infrastructure.Context;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -30,8 +31,12 @@ namespace DDDProject_Twitter.Presentation
             services.AddHttpClient();
             services.AddMemoryCache();
             services.AddSession();
-            services.AddControllersWithViews().AddFluentValidation();
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddControllersWithViews().AddFluentValidation();
+            services.AddAutoMapper(typeof(Mapping));
+
+            //"AddIdentity" sýnýfý için Microsoft.AspNetCore.Identity paketi indirilir.
             services.AddIdentity<AppUser, AppRole>(x => {
                 x.SignIn.RequireConfirmedAccount = false;
                 x.SignIn.RequireConfirmedEmail = false;
@@ -60,13 +65,18 @@ namespace DDDProject_Twitter.Presentation
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                   name: "profile",
+                   pattern: "{profile}/{userName}",
+                   defaults: new { controller = "Profile", action = "Details" });
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

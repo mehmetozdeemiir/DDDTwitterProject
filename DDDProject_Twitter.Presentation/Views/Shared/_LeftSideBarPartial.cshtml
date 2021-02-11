@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+
+
+<ul class="list-group">
+    <li class="list-group-item">
+        <a asp-controller="Home" asp-action="Index">Home</a>
+    </li>
+    @if (SignInManager.IsSignedIn(User))
+    {
+<li class="list-group-item">
+    <a asp-controller="Profile" asp-action="Details" asp-route-username="@User.Identity.Name">Profile</a>
+</li>
+                <li class="list-group-item">
+                    <a asp-controller="Account" asp-action="EditProfile" asp-route-username="@User.Identity.Name">Settings</a>
+                </li>}
+</ul>

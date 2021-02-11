@@ -48,7 +48,7 @@ namespace DDDProject_Twitter.Application.IoC
                 x.Password.RequireNonAlphanumeric = false;
             }).AddEntityFrameworkStores<ApplicationDbContext>();
 
-            return services;
+            return services; //burası iptal autofac yaptık zaten
         }
     }
 }

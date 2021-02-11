@@ -1,0 +1,7 @@
+﻿
+@{
+    ViewData["Title"] = "Details";
+}
+
+@await Component.InvokeAsync("ProfileSummary", new { UserName = @ViewBag.userName })
+
