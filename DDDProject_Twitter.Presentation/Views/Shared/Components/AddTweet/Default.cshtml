@@ -1,0 +1,17 @@
+﻿@model DDDProject_Twitter.Application.Models.DTOs.AddTweetDTO
+
+<form id="formAddTweet" enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input hidden asp-for="AppUserId" />
+    <div id="tweetValidation" role="alert"></div>
+    <div class="form-group">
+        <textarea name="Text" id="Text" placeholder="Share what you've been up to" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label>Choose Image</label>
+        <input type="file" id="Image" name="Image" style="display:none" data-toggle="tooltip" accept=".jpg, .jpeg, .png" />
+    </div>
+    <div class="form-group">
+        <button type="button" id="btnSendTweet" class="btn btn-outline-info" value="Post"></button>
+    </div>
+</form>
